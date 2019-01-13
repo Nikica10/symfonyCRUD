@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbar.html.twig') }}
+
+
+
+
+    {% if post is not empty %}
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                    <p><small>{{ post.author }}</small></p>
+                    <button type="button" class="btn btn-primary btn-sm">
+                        {#<a href="{{ path('single_post', {'id' : signlePost.id}) }}">Return</a>#}
+                    </button>
+
+                </div>
+            </div>
+
+
+
+    {% endif %}
+
+
+    <script>
+        $(".alert").alert('close')
+    </script>
+
+{% endblock %}

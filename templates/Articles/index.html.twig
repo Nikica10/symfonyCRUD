@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbar.html.twig') }}
+
+
+    {% if posts is not empty %}
+
+        {% for post in posts %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content[:150] ~ (post.content|length > 150 ? '...') }}</p>
+                    <p><small>{{ post.author }}</small></p>
+
+                    <button type="button" class="btn btn-primary btn-sm">
+                        <a href="{{ path('single_article', {'id' : post.id}) }}">Read More</a>
+                    </button>
+
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+
+
+
+    {% if maxPages > 1 %}
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {# `«` arrow  #}
+            <li {{ thisPage == 1 ? 'class="disabled"' }} class="page-item">
+                <a href="{{ path('articles', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}" class="page-link">«</a>
+            </li>
+
+            {# Render each page number #}
+            {% for i in 1..maxPages %}
+                <li {{ thisPage == i ? 'class="active"' }}  class="page-item">
+                    <a href="{{ path('articles', {page: i}) }}" class="page-link">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            {# `»` arrow #}
+            <li {{ thisPage == maxPages ? 'class="disabled"' }}  class="page-item">
+                <a href="{{ path('articles', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}" class="page-link">»</a>
+            </li>
+        </ul>
+        </nav>
+    {% endif %}
+
+
+{% endblock %}

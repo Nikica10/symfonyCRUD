@@ -24,6 +24,43 @@
 
     {% endif %}
 
+    {#Comments#}
+
+    <div class="row">
+        <div class="col-md-4">
+
+            {{ form_start(form) }}
+
+                {{ form_label(form.title) }}
+                {{ form_errors(form.title) }}
+                {{ form_widget(form.title) }}
+
+                {{ form_label(form.comment) }}
+                {{ form_errors(form.comment) }}
+                {{ form_widget(form.comment) }}
+
+            {{ form_end(form) }}
+
+            <h2>{{ "Comments:" }}</h2>
+<hr>
+        </div>
+    </div>
+
+    {% if comments is not empty %}
+
+        {% for comments in comments %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>{{ comments.title }}</h4>
+                    <p>{{ comments.comment }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
 
     <script>
         $(".alert").alert('close')
